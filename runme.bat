@@ -1,38 +1,38 @@
 @echo off
-rem °Ñtcp ºÍ tce µÄÎÄµµÉ¨Ãèµ¥Ò³,ÃüÃûÎª tcp0.pdf ºÍ tce0.pdf (1-9¼´¿É) 
-rem °ÑÕÕÆ¬·ÅÔÚphotoÄ¿Â¼
-rem ÅÄÕÕ¼ì²é±íÃüÃûÎª ÅÄÕÕ¼ì²é±í.pdf 
- 
+rem æŠŠtcp å’Œ tce çš„æ–‡æ¡£æ‰«æå•é¡µ,å‘½åä¸º tcp0.pdf å’Œ tce0.pdf (1-9å³å¯) 
+rem æŠŠç…§ç‰‡æ”¾åœ¨photoç›®å½•
+rem æ‹ç…§æ£€æŸ¥è¡¨å‘½åä¸º æ‹ç…§æ£€æŸ¥è¡¨.pdf 
+rem ä¸‹è½½ 7zipå’Œpdftk
 
+rem ä¿®æ”¹ä¸‹é¢ï¼”è¡Œä»£ç  
 set proj_date=20161219
-set proj_name=±¾À´Éú»î
+set proj_name=æœ¬æ¥ç”Ÿæ´»
 set tcp=0123456789XuZ
 set tce=0123456789
 
 
+rem ä¸‹é¢çš„ä»£ç æ— éœ€ä¿®æ”¹ã€€ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+
+
 set tcpgd=%proj_date%-%tcp%.pdf
 set tcegd=%proj_date%-%tce%.pdf
+set tcpgd_cn=%proj_date%-%tcp%-%proj_name%-TCPå·¥å•.pdf
+set tcegd_cn=%proj_date%-%tce%-%proj_name%-TCEå·¥å•.pdf
+set photo_dir=%proj_date%-%tcp%-%proj_name%-ç…§ç‰‡
 
-set tcpgd_cn=%proj_date%-%tcp%-%proj_name%-TCP¹¤µ¥.pdf
-set tcegd_cn=%proj_date%-%tce%-%proj_name%-TCE¹¤µ¥.pdf
 
-
-set photo_dir=%proj_date%-%tcp%-%proj_name%-ÕÕÆ¬
-
-if %processor_architecture%==x86  set zip=7zip\app\7-Zip\7z.exe
-if %processor_architecture%==x64  set zip=7zip\app\7-Zip64\7z.exe
+if %processor_architecture%==x86  set zip=7zip\app\7-Zip\7z.exe else  set zip=7zip\app\7-Zip64\7z.exe
 set pdftk=pdftk\App\pdftkbuilder\pdftk.exe
 
 
-
+rem å·¥å•
 %pdftk% tcp*.pdf cat output %tcpgd%  dont_ask   
 %pdftk% tce*.pdf cat output %tcegd%  dont_ask   
 move/Y %tcpgd% %tcpgd_cn% 
 move/Y %tcegd% %tcegd_cn%  
+rem ç…§ç‰‡
 if exist photo move/Y  photo  %photo_dir%  
-%zip% a -y %photo_dir%.zip %photo_dir% 
-if exist ÅÄÕÕ¼ì²é±í.pdf move/Y ÅÄÕÕ¼ì²é±í.pdf %proj_date%-%tcp%-%proj_name%-ÅÄÕÕ¼ì²é±í.pdf  
+if exist %photo_dir%   %zip% a -y %photo_dir%.zip %photo_dir%  
+rem æ‹ç…§æ£€æŸ¥ç¥¨è¡¨
+if exist æ‹ç…§æ£€æŸ¥è¡¨.pdf move/Y æ‹ç…§æ£€æŸ¥è¡¨.pdf %proj_date%-%tcp%-%proj_name%-æ‹ç…§æ£€æŸ¥è¡¨.pdf  
 
-
-
- 
